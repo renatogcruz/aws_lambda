@@ -23,25 +23,16 @@ jobs:
         go-version: [1.13.x]
     steps:
       - name: checkout source code
-        uses: actions/checkout@v1
-      - name: Install Go
-        uses: actions/setup-go@v1
-        with:
-          go-version: ${{ matrix.go-version }}
-      - name: Build binary
+        uses: actions/checkout@v1      
+      - name: Generate Zip
         run: |
-          cd example && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -a -o main main.go && zip deployment.zip main
+          zip deployment.zip *.py
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
-          function_name: gorush
-          zip_file: example/deployment.zip
-          memory_size: 128
-          timeout: 10
-          handler: foobar
-          role: arn:aws:iam::xxxxxxxxxxx:role/test1234
-          runtime: python11.x
+          function_name: primeirFuncao
+          zip_file: deployment.zip
 ```
