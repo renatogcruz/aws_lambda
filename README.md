@@ -36,3 +36,8 @@ jobs:
           function_name: primeirFuncao
           zip_file: deployment.zip
 ```
+---
+
+Reference:
+
+- https://github.com/alura-cursos/aws-lambda-alura
